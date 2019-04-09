@@ -6,7 +6,30 @@
 <meta charset="UTF-8">
 
 <style>
-.pagination a {
+#tableauVilles {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#tableauVilles td, #tableauVilles th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#tableauVilles tr:nth-child(even){background-color: #f2f2f2;}
+
+#tableauVilles tr:hover {background-color: #ddd;}
+
+#tableauVilles th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+
+#pagination a {
   color: black;
   float: left;
   padding: 8px 16px;
@@ -14,12 +37,12 @@
   transition: background-color .3s;
 }
 
-.pagination a.active {
+#pagination a.active {
   background-color: dodgerblue;
   color: white;
 }
 
-.pagination a:hover:not(.active) {background-color: #ddd;}
+#pagination a:hover:not(.active) {background-color: #ddd;}
 </style>
 </head>
 <body>
@@ -49,8 +72,9 @@
 		
 	<div id="affListe<%=i%>" style="display: none ; margin-left : 100px" >
 		<br/>
-		<table> 
+		<table id="tableauVilles"> 
 	    <tr>
+	    	<th scope="col">Editer</th>
 	    	<th scope="col">code commune</th>
 	    	<th scope="col">nom</th>
 	    	<th scope="col">code postal</th>
@@ -62,7 +86,11 @@
 	    
 	    <%for (int j=(i-1)*50;j<(i*50);j++){ 
 		String[] listeAttributs = liste.get(j).split(",");%>
-		<tr onClick="fonc()">
+		<tr>
+			<td> <form action="<%=request.getContextPath()%>/editerDonnees.jsp" method="post">
+				<input type="hidden" name="indice" value="<%=j%>">
+				<input type="submit" name="submit<%=j%>" value="Editer">
+				</form> </td>
 	        <td><%= listeAttributs[0].split("\"")[3] %></td>
 	        <td><%= listeAttributs[1].split("\"")[3] %></td>
 	        <td><%= listeAttributs[2].split("\"")[3] %></td>
@@ -75,7 +103,7 @@
 	</div>
 	<%} %>
 	
-	<div class="pagination">
+	<div id="pagination">
 	<% for (int i=1;i<nbPages;i++){
 		%>
 		<a onclick="myFunction(<%=i%>)"><%=i%></a>
@@ -93,13 +121,9 @@
 		function myFunction(i) {
 			document.getElementById("affListe"+actuel).style = "display:none";
 			actuel = i;
-			console.log("fonction appelée");
 		  	document.getElementById("affListe"+i).style = "display:block";
 		}
-		
-		function fonc(){
-			console.log("J'ai appelé ça");
-		}
+
 	</script>
 
 </body>

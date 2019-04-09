@@ -69,14 +69,12 @@
 	const req = new XMLHttpRequest();
 
 	req.onreadystatechange = function(event) {
-	    // XMLHttpRequest.DONE === 4
 	    if (this.readyState === XMLHttpRequest.DONE) {
 	        if (this.status === 200) {
 	        	var response = this.responseText;
 	        	document.getElementById('liste').value = response;
-	            //document.write("Réponse reçue: %s", this.responseText);
 	        } else {
-	        	//document.write("Status de la réponse: %d (%s)", this.status, this.statusText);
+	       		log.error();
 	        }
 	    }
 	};
