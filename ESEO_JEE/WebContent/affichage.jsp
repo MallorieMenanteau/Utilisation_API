@@ -6,6 +6,20 @@
 <meta charset="UTF-8">
 
 <style>
+a:link, a:visited {
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+a:hover, a:active {
+  background-color: green;
+}
+
+
 #tableauVilles {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;

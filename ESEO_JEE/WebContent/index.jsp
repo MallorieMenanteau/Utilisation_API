@@ -3,6 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+.bouton {color:#FFFFFF;background-color:green;font-size:30px;text-align:center}
+
+</style>
 <meta charset="UTF-8">
 <title>Choix villes</title>
 </head>
@@ -31,16 +35,16 @@
 	</script>
 
 	
-	<form action="<%=request.getContextPath()%>/AffichageServlet" method="post" >
-		<input type="hidden" id="liste" name="listeVilles">
+	<form style="text-align:center" action="<%=request.getContextPath()%>/AffichageServlet" method="post" >
+		<input type="hidden" id="liste" name="listeVilles" style="font-size:20px">
 		<h2> Que souhaitez-vous faire?</h2>
-		<label>Calculer une distance
-		<input type="radio" name="radio1" value="radio1">
+		<label style="font-size:20px">Calculer une distance
+		<input type="radio" name="radio1" value="radio1" >
 		</label><br>
-		<label>Afficher toutes les villes
+		<label style="font-size:20px">Afficher toutes les villes
 		<input type="radio" name="radio1" value="radio2">
-		</label>
-		<input type="submit" name="Submit" value="Valider">
+		</label><br><br>
+		<input type="submit" name="Submit" value="Valider" class="bouton">
 	</form>
 
 </body>

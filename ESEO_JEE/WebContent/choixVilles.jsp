@@ -3,6 +3,21 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+a:link, a:visited {
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+a:hover, a:active {
+  background-color: green;
+}
+
+</style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -59,6 +74,7 @@
 	La distance entre les villes sélectionnées est : <%= request.getAttribute("distance") %> km.
 	<%} %>
 	
+	<br>
 	<br>
 	
 	<a href="index.jsp">Retour à l'accueil!</a>
