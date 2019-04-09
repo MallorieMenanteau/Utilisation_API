@@ -10,19 +10,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class AffichageServlet
+ * Servlet implementation class CalculDistanceServlet
  */
-@WebServlet("/AffichageServlet")
-public class AffichageServlet extends HttpServlet {
+@WebServlet("/CalculDistanceServlet")
+public class CalculDistanceServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AffichageServlet() {
+    public CalculDistanceServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,8 +31,7 @@ public class AffichageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	
+		System.out.println("get!");
 	}
 
 	/**
@@ -41,11 +39,11 @@ public class AffichageServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		//System.out.println("post!");
 		
+		int ville1 = Integer.parseInt(request.getParameter("choix1"));
+		int ville2 = Integer.parseInt(request.getParameter("choix2"));
 		String villes = request.getParameter("listeVilles");
-		String action = request.getParameter("radio1");
-		
-		//System.out.println("villes: "+villes);
 		
 		String [] liste = villes.split("}");
 		
@@ -56,23 +54,24 @@ public class AffichageServlet extends HttpServlet {
 			listeVilles.add(liste[i].substring(2));
 		}
 		
-		HttpSession session = request.getSession();
+		//for(String ville : listeVilles)
+			//System.out.println(ville);
+	
 		
-		session.setAttribute("villes", villes);
-		session.setAttribute("listeVilles", listeVilles);
+		double latVille1 = Double.valueOf(listeVilles.get(ville1).split(",")[5].split("\"")[3]);
+		double latVille2 = Double.valueOf(listeVilles.get(ville2).split(",")[5].split("\"")[3]);
 		
-		RequestDispatcher dispat;
+		double longVille1 = Double.valueOf(listeVilles.get(ville1).split(",")[6].split("\"")[3]);
+		double longVille2 = Double.valueOf(listeVilles.get(ville2).split(",")[6].split("\"")[3]);
 		
-		if(action.equals("radio1")) {
-			dispat = request.getRequestDispatcher("choixVilles.jsp");
-		} else {
-			dispat = request.getRequestDispatcher("affichage.jsp");
-		}
+		double distance = Math.acos(Math.sin(latVille1*Math.PI/180)*Math.sin(latVille2*Math.PI/180)+Math.cos(latVille1*Math.PI/180)*Math.cos(latVille2*Math.PI/180)*Math.cos(longVille2*Math.PI/180-longVille1*Math.PI/180))*6371;
 		
+		request.setAttribute("distance", distance);
+		//request.setAttribute(ville1, o);
 		
-		dispat.forward(request, response);		
+		RequestDispatcher dispat = request.getRequestDispatcher("choixVilles.jsp");
 		
-		//doGet(request, response);
+		dispat.forward(request, response);	
 	}
 
 }

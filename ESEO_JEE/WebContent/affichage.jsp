@@ -28,31 +28,28 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-	Affichage
 	
 	<%@ page import = "java.util.*" %>
 		
+		
+	
+	<a href="index.jsp">Retour à l'accueil!</a>
+	
+	<br>
+	
 	<% List<String> liste = (List) session.getAttribute("listeVilles"); 
 		int nbPages = (liste.size())/50;
 		if(liste.size()%50 >0){
 			nbPages++;
 		}
 			%>
-	<div class="pagination">
-	<% for (int i=1;i<nbPages;i++){
-		%>
-		<button onclick="myFunction(<%=i%>)"><%=i%></button>
-		
-	<%} %>
 
-	</div>
-	
 	
 	<% for (int i=1;i<nbPages;i++){
 		%>
 		
-	<div id="affListe<%=i%>" style="display: none" >
+	<div id="affListe<%=i%>" style="display: none ; margin-left : 100px" >
+		<br/>
 		<table> 
 	    <tr>
 	    	<th scope="col">code commune</th>
@@ -66,7 +63,7 @@
 	    
 	    <%for (int j=(i-1)*50;j<(i*50);j++){ 
 		String[] listeAttributs = liste.get(j).split(",");%>
-		<tr>
+		<tr onClick="fonc()">
 	        <td><%= listeAttributs[0].split("\"")[3] %></td>
 	        <td><%= listeAttributs[1].split("\"")[3] %></td>
 	        <td><%= listeAttributs[2].split("\"")[3] %></td>
@@ -79,15 +76,30 @@
 	</div>
 	<%} %>
 	
+	<div class="pagination">
+	<% for (int i=1;i<nbPages;i++){
+		%>
+		<a onclick="myFunction(<%=i%>)"><%=i%></a>
+		
+	<%} %>
+	</div>
+	
+	
 	<script>
 		
 		var actuel =1;
+		
+		document.getElementById("affListe1").style = "display:block";
 	
 		function myFunction(i) {
 			document.getElementById("affListe"+actuel).style = "display:none";
 			actuel = i;
 			console.log("fonction appelée");
 		  	document.getElementById("affListe"+i).style = "display:block";
+		}
+		
+		function fonc(){
+			console.log("J'ai appelé ça");
 		}
 	</script>
 
