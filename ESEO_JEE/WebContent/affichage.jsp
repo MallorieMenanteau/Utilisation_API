@@ -23,8 +23,7 @@
 </style>
 </head>
 <body>
-
-
+ 
 <title>Insert title here</title>
 </head>
 <body>

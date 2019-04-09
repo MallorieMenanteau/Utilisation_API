@@ -44,7 +44,7 @@ public class AffichageServlet extends HttpServlet {
 		
 		String villes = request.getParameter("listeVilles");
 		String action = request.getParameter("radio1");
-		
+		 
 		//System.out.println("villes: "+villes);
 		
 		String [] liste = villes.split("}");

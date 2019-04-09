@@ -53,7 +53,7 @@
 	
 	</form>
 	
-	<br>
+	<br> 
 	<% if(request.getAttribute("distance")!=null){
 		%>
 	La distance entre les villes sélectionnées est : <%= request.getAttribute("distance") %> km.
