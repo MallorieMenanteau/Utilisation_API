@@ -4,7 +4,6 @@
 <html>
 <head>
 <style>
-
 a:link, a:visited {
   background-color: #4CAF50;
   color: white;
@@ -81,19 +80,24 @@ a:hover, a:active {
 	
 	<script type="text/javascript">
 	
+	
 	function put(i){
 		
 		var url = "http://localhost:8181/";
 		var code = <%=listeAttribut[0].split("\"")[3]%>;
 		var xhr = new XMLHttpRequest();
-		
+		console.log(code);
+		console.log(i+1);
 		xhr.open("PUT", url+'put?codeC=<%=listeAttribut[0].split("\"")[3]%>&aChanger='+i+'&param='+document.getElementById('parametre'+i).value, true);
 		xhr.onload = function () {
-			if (xhr.readyState == 4 && xhr.status != "200") {
+			if (xhr.readyState == 4 && xhr.status == "200") {
+				console.log("succès");
+			} else {
 				console.error();
 			}
-		xhr.send();
 		}
+		xhr.send();
+
 	}
 	
 	</script>
